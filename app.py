@@ -11,18 +11,14 @@ def print_definition(definition):
 
 
 def translate(word):
-    word = word.lower()
-    capitalized_word = word.capitalize()
-
-    definition = data.get(word)
-    capitalized_definition = data.get(capitalized_word)
-
-    if capitalized_definition:
-        print_definition(capitalized_definition)
-    elif definition:
-        print_definition(definition)
+    if word.upper() in data:
+        print_definition(data.get(word.upper()))
+    elif word.title() in data:
+        print_definition(data.get(word.title()))
+    elif word.lower() in data:
+        print_definition(data.get(word.lower()))
     else:
-        closest_matches = get_close_matches(word, data.keys(), n=1, cutoff=0.75)
+        closest_matches = get_close_matches(word.lower(), data.keys(), n=1, cutoff=0.75)
         if len(closest_matches) > 0:
             closest_match = closest_matches[0]
             answer = input('{} was not found in the dictionary, did you mean {}? [y/n]'.format(word, closest_match))
