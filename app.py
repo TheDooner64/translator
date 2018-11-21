@@ -12,10 +12,14 @@ def print_definition(definition):
 
 def translate(word):
     word = word.lower()
+    capitalized_word = word.capitalize()
 
     definition = data.get(word)
+    capitalized_definition = data.get(capitalized_word)
 
-    if definition:
+    if capitalized_definition:
+        print_definition(capitalized_definition)
+    elif definition:
         print_definition(definition)
     else:
         closest_matches = get_close_matches(word, data.keys(), n=1, cutoff=0.75)
